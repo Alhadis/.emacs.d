@@ -1,20 +1,21 @@
-;; Source packages from MELPA
-(require 'package)
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-(when (< emacs-major-version 27) (package-initialize))
-(when (version< emacs-version "26.3")
-  (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
+;; Load packages using `straight.el' and `use-package.el'
 
-;; Initialise `use-package.el' and auto-install missing packages
 (eval-when-compile (require 'use-package nil t))
 (if (fboundp 'use-package)
     ((require 'use-package-ensure)
      (setq use-package-always-ensure t))
 
-    ;; Hack to make first-time installation easier
-    (progn (setq package-selected-packages ())
+    ;; Hack to keep things D.R.Y. when falling back to default-installer
+    (progn (setq installed-packages ())
            (defmacro use-package (name &rest args)
-             `(push (quote ,name) package-selected-packages))))
+             `(push (quote ,name) installed-packages))))
+
+;; Load Git-related major modes
+(add-hook 'git-commit-mode-hook
+  (lambda ()
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)
+    (setq indent-tabs-mode nil)
+    (setq fill-column 72)))
 
 ;; Load YASnippets eagerly
 (add-to-list 'load-path "~/.emacs.d/snippets")
