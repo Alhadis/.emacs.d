@@ -19,14 +19,11 @@ package-lock.json
 
 # Project-specific
 *.elc
-.cask
-custom.el
-auto-save-list
-elpa
+/.cask
+/auto-save-list
+/custom.el
+/elpa
 /session*
+/snippets
+/site.el
 /url
-/packages/*
-!/packages/install*.el
-!/packages/load*.el
-!/packages/git-modes
-/tmp.el

@@ -17,7 +17,7 @@
 (blink-cursor-mode nil)
 
 ;; Modifying this file, could you not
-(setq custom-file "~/.emacs.d/packages/custom.el")
+(setq custom-file "~/.emacs.d/custom.el")
 
 ;; Don't leave clutter around while editing
 (setq auto-save-default nil
@@ -61,11 +61,17 @@
            (delete-trailing-whitespace))
          nil t))))
 
-;; Load packages
-(setq package-user-dir (expand-file-name "packages" user-emacs-directory))
-(add-to-list 'load-path 'package-user-dir)
-(load "load-straight.el")
+;; Load Git-related major modes
+(add-to-list 'load-path "~/.emacs.d/lisp")
+(add-hook 'git-commit-mode-hook
+  (lambda ()
+    (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)
+    (setq indent-tabs-mode nil)
+    (setq fill-column 72)))
+(load "git-modes")
+(load "git-commit")
 
 ;; Load everything else
-(load "keybindings.el")
-(load "theme.el")
+(load "~/.emacs.d/keybindings")
+(load "~/.emacs.d/theme")
+(load "~/.emacs.d/packages")
