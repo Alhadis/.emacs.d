@@ -62,7 +62,7 @@
          nil t))))
 
 ;; Load Git-related major modes
-(add-to-list 'load-path "~/.emacs.d/lisp")
+(add-to-list 'load-path "~/.emacs.d/git-modes")
 (add-hook 'git-commit-mode-hook
   (lambda ()
     (add-hook 'before-save-hook #'delete-trailing-whitespace nil t)
