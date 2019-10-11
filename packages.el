@@ -6,21 +6,14 @@
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 ;; Initialise `use-package.el' and auto-install missing packages
-(eval-when-compile (require 'use-package nil t))
-(if (fboundp 'use-package)
-    ((require 'use-package-ensure)
-     (setq use-package-always-ensure t))
+(if (package-installed-p 'use-package)
+    (eval-when-compile (require 'use-package))
 
-    ;; Hack to make first-time installation easier
-    (progn (setq package-selected-packages ())
-           (defmacro use-package (name &rest args)
-             `(push (quote ,name) package-selected-packages))))
-
-;; Load YASnippets eagerly
-(add-to-list 'load-path "~/.emacs.d/snippets")
-(setq yas-indent-line "fixed")
-(require 'yasnippet nil t)
-(when (fboundp 'yas-global-mode) (yas-global-mode 1))
+    ;; Hack to facilitate non-interactive installation
+    (progn (defmacro use-package (name &rest args)
+          `(push (quote ,name) package-selected-packages))
+           (use-package use-package)
+           (add-hook 'after-init-hook 'package-refresh-contents)))
 
 ;; Start MELPIN’
 (use-package adoc-mode)
@@ -149,13 +142,6 @@
   :config (setq tab-width 4)
           (setq indent-tabs-mode t)
           (set (make-local-variable 'sgml-basic-offset) 4))
-(use-package sh-mode
-  :config
-  (setq sh-basic-offset 4)
-  (setq sh-indentation 4)
-  (setq sh-use-smie nil)
-  (setq indent-tabs-mode t)
-  (setq tab-width 4))
 (use-package shift-number)
 (use-package slime)
 (use-package sml-mode)

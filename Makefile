@@ -8,6 +8,6 @@ clean:
 	find . -type f -name '*.elc' -delete
 	rm -f custom.el
 	rm -rf elpa
-	rm -rfP auto-save-list
+	rm -rfP auto-save-list || true
 
 .PHONY: clean
