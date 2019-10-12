@@ -6,7 +6,7 @@
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
 ;; Initialise `use-package.el' and auto-install missing packages
-(if (package-installed-p 'use-package)
+(if (fboundp 'use-package)
     (eval-when-compile (require 'use-package))
 
     ;; Hack to facilitate non-interactive installation
@@ -49,7 +49,6 @@
 (use-package dyalog-mode)
 (use-package editorconfig)
 (use-package enh-ruby-mode)
-(use-package erlang)
 (use-package fic-mode)
 (use-package form-feed)
 (use-package forth-mode)
