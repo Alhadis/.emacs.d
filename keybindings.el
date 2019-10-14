@@ -12,6 +12,7 @@
 (global-set-key (kbd "C-M-]") 'next-buffer)
 (global-set-key (kbd "C-n") 'find-file)
 (global-set-key (kbd "C-o") 'find-file-at-point)
+(global-set-key (kbd "C-]") 'next-buffer)
 (global-set-key (kbd "C-<prior>") 'beginning-of-buffer)
 (global-set-key (kbd "C-<next>") 'end-of-buffer)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
@@ -54,27 +55,3 @@
             (not (nth 4 (syntax-ppss))))
        (describe-symbol (symbol-at-point)) ;; Test: intro(3)
        (call-interactively 'man-follow))))
-
-;;
-;; Angrier buffer switching; ignores `*Messages*' and other bullcrap.
-;;
-(global-set-key
- (kbd "C-]")
- (lambda ()
-  "Cycle through buffers without stopping on unwanted buffers."
-  (interactive)
-  (let (list (visible-buffer-list))
-       (setq list (remove (current-buffer) list))
-       (if (> 1 (length list))
-            (switch-to-buffer (nth 1 list))
-            (next-buffer)))))
-
-(defun visible-buffer-list ()
-  "Retrieves the contents of `buffer-list' without internal-only buffers."
-  (remove nil (mapcar (lambda (buf &optional name)
-                        (setq name (buffer-name buf))
-                        (if (or (string= " " (substring name 0 1))
-                                (string= name "*Messages*")
-                                (string= name "*Completions*"))
-                            nil buf))
-                      (buffer-list))))
