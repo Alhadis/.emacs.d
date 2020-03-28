@@ -85,4 +85,3 @@
 ;; Load everything else
 (load "~/.emacs.d/keybindings")
 (load "~/.emacs.d/theme")
-(load "~/.emacs.d/packages")
