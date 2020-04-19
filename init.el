@@ -14,7 +14,6 @@
 
 ;; No pointless distractions, please
 (setq inhibit-startup-screen t)
-(blink-cursor-mode nil)
 
 ;; Modifying this file, could you not
 (setq custom-file "~/.emacs.d/custom.el")
