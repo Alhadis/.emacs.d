@@ -33,8 +33,6 @@
   (add-to-list 'default-frame-alist '(background-mode . 'dark))
   (add-to-list 'default-frame-alist '(font            . "DejaVu Sans Mono-14"))
   (add-to-list 'default-frame-alist '(line-spacing    . 2))
-  (add-to-list 'default-frame-alist '(width           . 130))
-  (add-to-list 'default-frame-alist '(height          . 85))
   (add-to-list 'default-frame-alist '(alpha           . 90))
   (setq frame-title-format nil)
 
@@ -45,6 +43,12 @@
     (add-to-list 'default-frame-alist '(font . "Menlo-14"))
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . 'dark)))
+
+  ; Fullscreen by default
+  (setq frame-resize-pixelwise t)
+  (add-hook 'emacs-startup-hook 'toggle-frame-maximized)
+  (add-hook 'after-make-frame-functions (lambda (frame) (select-frame frame)
+                                                        (toggle-frame-maximized)))
 
   ; Theme based on `tsdh-dark' theme
   (custom-set-faces
