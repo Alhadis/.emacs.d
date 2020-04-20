@@ -21,6 +21,7 @@
 
 ;; Graphical displays
 (when (getenv "DISPLAY")
+  (fringe-mode '(0 . 0))
   (custom-set-variables
     '(blink-cursor-mode nil)
     '(cursor-type (quote (bar . 1)))
