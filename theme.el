@@ -28,6 +28,22 @@
     '(scroll-bar-mode nil)
     '(tool-bar-mode nil))
 
+  ; Frame parameters
+  (add-to-list 'default-frame-alist '(background-mode . 'dark))
+  (add-to-list 'default-frame-alist '(font            . "Menlig-14"))
+  (add-to-list 'default-frame-alist '(line-spacing    . 2))
+  (add-to-list 'default-frame-alist '(width           . 130))
+  (add-to-list 'default-frame-alist '(height          . 85))
+  (add-to-list 'default-frame-alist '(alpha           . 90))
+  (setq frame-title-format nil)
+
+  ; macOS-specific polishes
+  (when (eq (window-system) 'ns)
+    (setq ns-use-proxy-icon nil
+          ns-use-thin-smoothing t)
+    (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
+    (add-to-list 'default-frame-alist '(ns-appearance . 'dark)))
+
   ; Theme based on `tsdh-dark' theme
   (custom-set-faces
     '(custom-button                ((t (:foreground "#000000" :background "#888888" :box (:line-width 2 :style released-button) :bold))))
