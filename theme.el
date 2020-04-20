@@ -24,6 +24,7 @@
   (fringe-mode '(0 . 0))
   (custom-set-variables
     '(blink-cursor-mode nil)
+    '(cursor-in-non-selected-windows nil)
     '(cursor-type (quote (bar . 1)))
     '(global-display-line-numbers-mode t)
     '(scroll-bar-mode nil)
