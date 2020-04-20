@@ -65,6 +65,10 @@
            (delete-trailing-whitespace))
          nil t))))
 
+;; Prevent `*scratch*' buffer from being closed
+(add-hook 'kill-buffer-query-functions
+  (lambda () (not (eq (get-buffer "*scratch*") (current-buffer)))))
+
 ;; Load Git-related major modes
 (add-to-list 'load-path "~/.emacs.d/git-modes")
 (add-hook 'git-commit-mode-hook
