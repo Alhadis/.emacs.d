@@ -32,7 +32,7 @@
 
   ; Frame parameters
   (add-to-list 'default-frame-alist '(background-mode . 'dark))
-  (add-to-list 'default-frame-alist '(font            . "DejaVu Sans Mono-14"))
+  (add-to-list 'default-frame-alist '(font            . "DejaVu Sans Mono-11"))
   (add-to-list 'default-frame-alist '(line-spacing    . 2))
   (add-to-list 'default-frame-alist '(alpha           . 90))
   (setq frame-title-format nil)
