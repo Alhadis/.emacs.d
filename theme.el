@@ -32,6 +32,7 @@
 
   ; Frame parameters
   (add-to-list 'default-frame-alist '(background-mode . 'dark))
+  (add-to-list 'default-frame-alist '(name            . "Emacs"))
   (add-to-list 'default-frame-alist '(font            . "DejaVu Sans Mono-11"))
   (add-to-list 'default-frame-alist '(line-spacing    . 2))
   (add-to-list 'default-frame-alist '(alpha           . 90))
@@ -41,6 +42,7 @@
   (when (eq (window-system) 'ns)
     (setq ns-use-proxy-icon nil
           ns-use-thin-smoothing t)
+    (add-to-list 'default-frame-alist '(name . ""))
     (add-to-list 'default-frame-alist '(font . "Menlo-14"))
     (add-to-list 'default-frame-alist '(ns-transparent-titlebar . t))
     (add-to-list 'default-frame-alist '(ns-appearance . 'dark)))
