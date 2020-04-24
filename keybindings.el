@@ -47,11 +47,14 @@
        (keyboard-quit)
      (call-interactively 'goto-line))))
 
+(defun at-comment-p (&optional point)
+  "Return non-nil if POINT is currently inside a comment."
+  (nth 4 (syntax-ppss point)))
+
 (global-set-key
  (kbd "<f1>")
  (lambda () "Look up documentation for the term at point."
    (interactive)
-   (if (and (memq major-mode '(emacs-lisp-mode lisp-interaction-mode))
-            (not (nth 4 (syntax-ppss))))
-       (describe-symbol (symbol-at-point)) ;; Test: intro(3)
+   (if (and (lispp) (not (at-comment-p)))  ;; Test: intro(3)
+       (describe-symbol (symbol-at-point))
        (call-interactively 'man-follow))))
