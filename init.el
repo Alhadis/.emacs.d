@@ -38,16 +38,33 @@
 
 ;; Configure indentation
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
-(setq default-tab-width 4
-      indent-tabs-mode t
-      indent-line-function 'insert-tab
-      coffee-indent-tabs-mode t
-      sh-basic-offset 4
-      sh-indentation 4
-      sh-use-smie nil
-      indent-tabs-mode t
-      tab-width 4
-      nxml-child-indent 4)
+
+(defun lispp ()
+  "Return t if `major-mode' is any derivative of Lisp."
+  (interactive)
+  (not (null (derived-mode-p 'emacs-lisp-mode
+                             'lisp-interaction-mode
+                             'lisp-mode
+                             'scheme-mode))))
+
+(defun configure-indent ()
+  "Set buffer-local variables for indentation."
+  (interactive)
+  (unless (lispp)
+    (setq default-tab-width 4
+          indent-tabs-mode t
+          indent-line-function 'insert-tab
+          coffee-indent-tabs-mode t
+          sh-basic-offset 4
+          sh-indentation 4
+          sh-use-smie nil
+          indent-tabs-mode t
+          tab-width 4
+          nxml-child-indent 4)))
+
+(add-hook 'text-mode-hook  'configure-indent)
+(add-hook 'prog-mode-hook  'configure-indent)
+(add-hook 'after-init-hook 'configure-indent)
 
 ;; Prevent tabs from creeping into Lisp code
 (dolist (hook
