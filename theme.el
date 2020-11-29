@@ -21,7 +21,8 @@
 
 ;; Graphical displays
 (when (getenv "DISPLAY")
-  (fringe-mode '(0 . 0))
+  (when (fboundp 'fringe-mode)
+        (fringe-mode '(0 . 0)))
   (custom-set-variables
     '(blink-cursor-mode nil)
     '(cursor-in-non-selected-windows nil)
