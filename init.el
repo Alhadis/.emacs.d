@@ -103,5 +103,7 @@
 (when (fboundp 'yas-global-mode) (yas-global-mode 1))
 
 ;; Load everything else
+(unless (getenv "NO_PKG")
+        (load "~/.emacs.d/packages"))
 (load "~/.emacs.d/keybindings")
 (load "~/.emacs.d/theme")

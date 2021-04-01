@@ -5,152 +5,112 @@
 (when (version< emacs-version "26.3")
   (setq gnutls-algorithm-priority "NORMAL:-VERS-TLS1.3"))
 
-;; Initialise `use-package.el' and auto-install missing packages
-(if (fboundp 'use-package)
-    (eval-when-compile (require 'use-package))
+(defmacro use (name &rest body)
+  "Attempt to load package NAME. If successful, evaluate BODY and return t."
+  `(if (require ,name nil t)
+       (progn ,@body t)
+       (let ((list 'package-selected-packages))
+            (unless (boundp list) (setq list ()))
+            (add-to-list list ,name) nil)))
 
-    ;; Hack to facilitate non-interactive installation
-    (progn (defmacro use-package (name &rest args)
-          `(push (quote ,name) package-selected-packages))
-           (use-package use-package)
-           (add-hook 'after-init-hook 'package-refresh-contents)))
-
-;; Start MELPIN’
-(use-package adoc-mode)
-(use-package aggressive-indent
-  :config
+;; Begin loading packages
+(use 'aggressive-indent
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
-(use-package apache-mode)
-(use-package bison-mode)
-(use-package bnf-mode)
-(use-package bnfc)
-(use-package brainfuck-mode)
-(use-package cmake-mode)
-(use-package cc-mode
-  :config
-  (setq c-file-style "K&R")
-  (setq c-basic-offset 4)
-  (setq c-tab-always-indent t)
-  (setq c-syntactic-indentation nil))
-(use-package cperl-mode
-  :config
+(use 'cc-mode
+  (add-hook 'cc-mode-hook (lambda ()
+    (setq c-file-style "K&R")
+    (setq c-basic-offset 4)
+    (setq c-tab-always-indent t)
+    (setq c-syntactic-indentation nil))))
+(use 'cperl-mode
   (setq tab-width 8)
   (setq cperl-indent-level 8)
   (setq cperl-extra-newline-before-brace nil)
   (setq cperl-merge-trailing-else nil))
-(use-package coffee-mode)
-(use-package csv-mode)
-(use-package cuda-mode)
-(use-package dashboard)
-(use-package deadgrep)
-(use-package dna-mode)
-(use-package dockerfile-mode)
-(use-package dotenv-mode)
-(use-package dyalog-mode)
-(use-package editorconfig)
-(use-package enh-ruby-mode)
-(use-package fic-mode)
-(use-package form-feed)
-(use-package forth-mode)
-(use-package glsl-mode)
-(use-package go-mode)
-(use-package haskell-mode)
-(use-package haskell-tab-indent)
-(use-package ini-mode)
-(use-package js2-mode
-  :config (setq js2-highlight-level 3)
-          (setq js2-include-node-externs t)
-          (setq js2-strict-trailing-comma-warning nil)
-          (setq js2-strict-cond-assign-warning nil)
-          (setq js2-strict-inconsistent-return-warning nil)
-          (setq indent-line-function 'insert-tab)
-          (setq indent-tabs-mode t)
-          (setq tab-width 4)
-  :interpreter ("chakra" "d8" "js" "node" "qjs" "rhino" "v8" "v8-shell")
-  :mode (("\\.es[0-9]?\\'\\|\\.[cmsp]?js\\'\\|\\.eslintrc\\'" . js2-mode)
-         ("\\.jsx\\'" . js2-jsx-mode)))
-(use-package less-css-mode)
-(use-package lfe-mode)
-(use-package markdown-mode)
-(use-package mocha
-  :config
-  (defcustom mocha-test-directory-regexp
-     "/\\(test\\|spec\\)s?/?$"
-     "Regular expression for identifying test directories."
-     :type 'string
-     :group 'mocha)
-  (defconst mocha-bdd-globals
-    '("after"
-      "afterEach"
-      "before"
-      "beforeEach"
-      "context"
-      "describe"
-      "it"
-      "specify")
-    "Functions globalised by Mocha's `BDD' interface.")
-  (defconst mocha-bdd-globals
-    '("after"
-      "afterEach"
-      "before"
-      "beforeEach"
-      "context"
-      "describe"
-      "it"
-      "specify")
-    "Functions globalised by Mocha's `BDD' interface.")
-  (defconst mocha-tdd-globals
-    '("setup"
-      "suite"
-      "suiteSetup"
-      "suiteTeardown"
-      "test"
-      "teardown")
-    "Functions globalised by Mocha's `TDD' interface.")
-  (defconst mocha-qunit-globals
-    '("after"
-      "afterEach"
-      "before"
-      "beforeEach"
-      "test"
-      "suite")
-    "Functions globalised by Mocha's `QUnit' interface.")
-  (add-hook 'js2-init-hook
-     (lambda ()
-        (when (string-match mocha-test-directory-regexp
-              (file-name-directory (buffer-file-name)))
-        (setq js2-additional-externs mocha-bdd-globals)))))
-(use-package move-text
-  :bind ("C-<up>"   . move-text-up)
-  :bind ("C-<down>" . move-text-down))
-(use-package multiple-cursors)
-(use-package nasm-mode)
-(use-package newlisp-mode)
-(use-package ninja-mode)
-(use-package nroff-mode)
-(use-package plisp-mode
-  :config
+(use 'adoc-mode)
+(use 'apache-mode)
+(use 'bison-mode)
+(use 'bnf-mode)
+(use 'bnfc)
+(use 'brainfuck-mode)
+(use 'cmake-mode)
+(use 'cperl-mode)
+(use 'coffee-mode)
+(use 'csv-mode)
+(use 'cuda-mode)
+(use 'dashboard)
+(use 'deadgrep)
+(use 'dna-mode)
+(use 'dockerfile-mode)
+(use 'dotenv-mode)
+(use 'dyalog-mode)
+(use 'editorconfig)
+(use 'enh-ruby-mode)
+(use 'fic-mode)
+(use 'form-feed)
+(use 'forth-mode)
+(use 'glsl-mode)
+(use 'go-mode)
+(use 'haskell-mode)
+(use 'haskell-tab-indent)
+(use 'ini-mode)
+(use 'js2-mode)
+(use 'less-css-mode)
+(use 'lfe-mode)
+(use 'markdown-mode)
+(use 'mocha)
+(use 'js2-mode
+  (add-hook 'js2-mode (lambda ()
+    (setq js2-highlight-level 3)
+    (setq js2-include-node-externs t)
+    (setq js2-strict-trailing-comma-warning nil)
+    (setq js2-strict-cond-assign-warning nil)
+    (setq js2-strict-inconsistent-return-warning nil)
+    (setq indent-line-function 'insert-tab)
+    (setq indent-tabs-mode t)
+    (setq tab-width 4)))
+  (add-to-list 'auto-mode-alist '("\\.jsx\\'" . js2-jsx-mode))
+  (dolist (patt '("\\.[cmsp]?js\\'"
+                  "\\.es[0-9]?\\'"
+                  "\\.eslintrc\\'"
+                  "\\.jscript\\'"
+                  "\\._?js[bmse]?\\'"
+                  "\\.snap\\'"))
+          (add-to-list 'auto-mode-alist (cons patt 'js2-mode)))
+  (dolist (name '("chakra" "d8" "js" "node" "qjs" "rhino" "v8" "v8-shell"))
+          (add-to-list 'interpreter-mode-alist (cons name 'js2-mode))))
+(use 'move-text
+  (global-set-key (kbd "C-<up>")   'move-text-up)
+  (global-set-key (kbd "C-<down>") 'move-text-down))
+(use 'multiple-cursors)
+(use 'nasm-mode)
+(use 'newlisp-mode)
+(use 'ninja-mode)
+(use 'nroff-mode)
+(use 'plisp-mode
   (setq plisp-syntax-highlighting-p t))
-(use-package pov-mode)
-(use-package powershell)
-(use-package rust-mode)
-(use-package scad-mode)
-(use-package sed-mode)
-(use-package sgml-mode
-  :bind   ([tab] . self-insert-command)
-  :config (setq tab-width 4)
-          (setq indent-tabs-mode t)
-          (set (make-local-variable 'sgml-basic-offset) 4))
-(use-package shift-number)
-(use-package slime)
-(use-package sml-mode)
-(use-package spice-mode)
-(use-package ssh-config-mode)
-(use-package toml-mode)
-(use-package typescript-mode
-  :mode "\\.tsx\\'"
-  :interpreter ("deno" "tsc" "ts-node"))
-(use-package vimrc-mode)
-(use-package wavefront-obj-mode)
-(use-package xterm-color)
-(use-package yaml-mode)
+(use 'pov-mode)
+(use 'powershell)
+(use 'rust-mode)
+(use 'scad-mode)
+(use 'sed-mode)
+(use 'sgml-mode
+  (define-key sgml-mode-map (kbd "tab") 'self-insert-command)
+  (add-hook 'sgml-mode-hook (lambda ()
+    (setq tab-width 4)
+    (setq indent-tabs-mode t)
+    (set (make-local-variable 'sgml-basic-offset) 4))))
+(use 'shift-number)
+(use 'slime)
+(use 'sml-mode)
+(use 'spice-mode)
+(use 'ssh-config-mode)
+(use 'toml-mode)
+(use 'typescript-mode
+  (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
+  (dolist (name '("deno" "tsc" "ts-node"))
+          (add-to-list 'interpreter-mode-alist (cons name 'typescript-mode))))
+(use 'vimrc-mode)
+(use 'wavefront-obj-mode)
+(use 'xterm-color)
+(use 'yaml-mode)
