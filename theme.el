@@ -56,7 +56,7 @@
 
   ; Theme based on `tsdh-dark' theme
   (custom-set-faces
-    '(custom-button                ((t (:foreground "#000000" :background "#888888" :box (:line-width 2 :style released-button) :bold))))
+    '(custom-button                ((t (:foreground "#000000" :background "#888888" :box (:line-width 2 :style released-button) :weight bold))))
     '(default                      ((t (:background "#000000" :foreground "#FFFFFF"))))
     '(diff-added                   ((t (:inherit diff-changed :background "dark green"))))
     '(diff-changed                 ((t (:background "midnight blue"))))
