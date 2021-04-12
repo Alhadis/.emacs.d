@@ -3,14 +3,30 @@
 (setenv "LANG" "en_AU.UTF-8")
 (setenv "LC_COLLATE" "C")
 
-;; Unicode support for graphical displays
-(if (getenv "DISPLAY")
-    (progn (setq locale-coding-system 'utf-8)
-           (set-terminal-coding-system 'utf-8)
-           (set-keyboard-coding-system 'utf-8)
-           (set-selection-coding-system 'utf-8)
-           (prefer-coding-system 'utf-8)
-           (define-coding-system-alias 'UTF-8 'utf-8)))
+;; Graphical displays
+(when (display-graphic-p)
+  ;; Enable Unicode support
+  (setq locale-coding-system 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (define-coding-system-alias 'UTF-8 'utf-8)
+
+  ;; macOS: Fix search-paths when launched via symlink
+  (when (and (eq (window-system) 'ns)
+             (not (member "~/.files/bin/" exec-path)))
+    (dolist (var '("PATH" "MANPATH")) (setenv var
+      (string-join (append
+        (condition-case error
+          (process-lines "/bin/sh" "-c" (format ". ~/.profile; printf '%%s\\n' \"$%s\" | tr : '\\n'" var))
+          (message "Failed to list $%s: %s" var error) nil)
+        (if (string= var "PATH")
+          (seq-filter (lambda (x) (string-prefix-p invocation-directory x)) exec-path)
+          (list (expand-file-name (concat invocation-directory "../Resources/man")))))
+      path-separator)))
+    (add-hook 'after-init-hook (lambda ()
+      (setq exec-path (split-string (getenv "PATH") path-separator t))))))
 
 ;; No pointless distractions, please
 (setq inhibit-startup-screen t)
