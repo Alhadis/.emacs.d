@@ -53,11 +53,14 @@
 (use 'go-mode)
 (use 'haskell-mode)
 (use 'haskell-tab-indent)
+(use 'iasm-mode)
 (use 'ini-mode)
+(use 'intel-hex-mode)
 (use 'js2-mode)
 (use 'less-css-mode)
 (use 'lfe-mode)
 (use 'markdown-mode)
+(use 'masm-mode)
 (use 'mocha)
 (use 'js2-mode
   (add-hook 'js2-mode (lambda ()
@@ -92,6 +95,7 @@
 (use 'pov-mode)
 (use 'powershell)
 (use 'rust-mode)
+(use 's)
 (use 'scad-mode)
 (use 'sed-mode)
 (use 'sgml-mode
@@ -113,4 +117,16 @@
 (use 'vimrc-mode)
 (use 'wavefront-obj-mode)
 (use 'xterm-color)
+(use 'x86-lookup
+  (setq x86-lookup-browse-pdf-function #'open-pdf)
+  (setq x86-lookup-pdf
+    (locate-file "325462-sdm-vol-1-2abcd-3abcd.pdf"
+      (list "~/Documents"      "~/Documents/eBooks"
+            "~/Downloads"      "~/Downloads/eBooks"
+            "~/.files/share"   "~/.files/share/doc"
+            "~/.files/var/doc" "~/.files/var/share/doc"
+            "~/.local/share"   "~/.local/share/doc"
+            "/usr/local/share" "/usr/local/share/doc"
+            "/usr/share"       "/usr/share/doc"
+            "~/.emacs.d"))))
 (use 'yaml-mode)

@@ -55,6 +55,8 @@
  (kbd "<f1>")
  (lambda () "Look up documentation for the term at point."
    (interactive)
-   (if (and (lispp) (not (at-comment-p)))  ;; Test: intro(3)
-       (describe-symbol (symbol-at-point))
+   (or (when (and (lispp) (not (at-comment-p)))
+             (describe-symbol (symbol-at-point)) t)
+       (when (and (asmp) (fboundp 'x86-lookup))
+             (x86-lookup (thing-at-point 'word)) t)
        (call-interactively 'man-follow))))

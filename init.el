@@ -55,6 +55,14 @@
 ;; Configure indentation
 (when (fboundp 'electric-indent-mode) (electric-indent-mode -1))
 
+(defun asmp ()
+  "Return t if `major-mode' is any assembly-like language."
+  (interactive)
+  (not (null (derived-mode-p 'asm-mode
+                             'iasm-mode
+                             'nasm-mode
+                             'masm-mode))))
+
 (defun lispp ()
   "Return t if `major-mode' is any derivative of Lisp."
   (interactive)
@@ -62,6 +70,31 @@
                              'lisp-interaction-mode
                              'lisp-mode
                              'scheme-mode))))
+
+(defun find-app (id)
+  "Locate a macOS `*.app' bundle with the given ID."
+  (unless (string= system-type "darwin")
+    (error "macOS is required to use this function"))
+  (when-let*
+    ((app (car (process-lines "mdfind" (format "kMDItemCFBundleIdentifier == '%s'" id))))
+     (exe (car (reverse (split-string app "/" t)))))
+    (concat app "/Contents/MacOS/" (s-chop-suffixes '(".app") exe))))
+
+(defun open-pdf (file &optional page-num)
+  "Open a PDF document at the designated PAGE-NUM."
+  (interactive "fOpen PDF: \nnPage number (default: 1): ")
+  (setq file (expand-file-name file))
+  (when (and (not (boundp 'page-num))
+             (called-interactively-p 'any))
+        (setq page-num 1))
+  (start-process "open-pdf" nil
+    (if (string= system-type "darwin")
+        ;; XXX: open(1) discards fragment identifiers in URLs, so `file:///file.pdf#page=1' won't work.
+        (or (find-app "com.google.Chrome")
+            (find-app "com.apple.Safari")
+            (find-app "org.mozilla.firefox"))
+        "xdg-open") ;; TODO: Test this
+    (format "file://%s#page=%s" file page-num)))
 
 (defun configure-indent ()
   "Set buffer-local variables for indentation."
