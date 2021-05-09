@@ -152,6 +152,7 @@
 (when (fboundp 'yas-global-mode) (yas-global-mode 1))
 
 ;; Load everything else
+(with-eval-after-load "outline" (require 'foldout nil t))
 (unless (getenv "NO_PKG")
         (load "~/.emacs.d/packages"))
 (load "~/.emacs.d/keybindings")
