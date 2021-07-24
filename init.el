@@ -16,6 +16,7 @@
   ;; macOS: Fix search-paths when launched via symlink
   (when (and (eq (window-system) 'ns)
              (not (member "~/.files/bin/" exec-path)))
+    (eval-when-compile (require 'subr-x))
     (dolist (var '("PATH" "MANPATH")) (setenv var
       (string-join (append
         (condition-case error
