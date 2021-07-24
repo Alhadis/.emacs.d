@@ -116,6 +116,10 @@
           (add-to-list 'interpreter-mode-alist (cons name 'typescript-mode))))
 (use 'vimrc-mode)
 (use 'wavefront-obj-mode)
+(use 'yasnippet
+  (add-to-list 'yas-snippet-dirs "~/Labs/YASR/snippets")
+  (setq yas-indent-line "fixed")
+  (yas-global-mode 1))
 (use 'xterm-color)
 (use 'x86-lookup
   (setq x86-lookup-browse-pdf-function #'open-pdf)

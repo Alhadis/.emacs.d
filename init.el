@@ -146,12 +146,6 @@
 (load "git-modes")
 (load "git-commit")
 
-;; Load YASnippets
-(add-to-list 'load-path "~/.emacs.d/snippets")
-(setq yas-indent-line "fixed")
-(require 'yasnippet nil t)
-(when (fboundp 'yas-global-mode) (yas-global-mode 1))
-
 ;; Load everything else
 (with-eval-after-load "outline" (require 'foldout nil t))
 (unless (getenv "NO_PKG")
