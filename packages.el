@@ -50,7 +50,8 @@
 (use 'editorconfig)
 (use 'enh-ruby-mode)
 (use 'fic-mode)
-(use 'form-feed)
+(use 'form-feed
+  (global-form-feed-mode))
 (use 'forth-mode)
 (use 'glsl-mode)
 (use 'go-mode)
