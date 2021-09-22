@@ -152,3 +152,4 @@
         (load "~/.emacs.d/packages"))
 (load "~/.emacs.d/keybindings")
 (load "~/.emacs.d/theme")
+(load "~/.emacs.d/site" t)
