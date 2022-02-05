@@ -65,6 +65,10 @@
 (use 'lfe-mode)
 (use 'markdown-mode)
 (use 'masm-mode)
+(use 'mediawiki
+  (dolist (patt '("\\.wiki\\(?:text\\|pedia\\)?\\'"
+                  "\\.mediawiki\\'"))
+          (add-to-list 'auto-mode-alist (cons patt 'mediawiki-mode))))
 (use 'mocha)
 (use 'js2-mode
   (add-hook 'js2-mode (lambda ()
