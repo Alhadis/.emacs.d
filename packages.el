@@ -50,6 +50,7 @@
 (use 'editorconfig)
 (use 'enh-ruby-mode)
 (use 'fic-mode)
+(use 'firestarter)
 (use 'form-feed
   (global-form-feed-mode))
 (use 'forth-mode)
@@ -60,7 +61,6 @@
 (use 'iasm-mode)
 (use 'ini-mode)
 (use 'intel-hex-mode)
-(use 'js2-mode)
 (use 'less-css-mode)
 (use 'lfe-mode)
 (use 'markdown-mode)
