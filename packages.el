@@ -102,8 +102,6 @@
   (setq plisp-syntax-highlighting-p t))
 (use 'pov-mode)
 (use 'powershell)
-(use 'realgud)
-(use 'realgud-node-inspect)
 (use 'rust-mode)
 (use 's)
 (use 'scad-mode)
