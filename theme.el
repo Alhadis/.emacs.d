@@ -27,6 +27,7 @@
     '(blink-cursor-mode nil)
     '(cursor-in-non-selected-windows nil)
     '(cursor-type (quote (bar . 1)))
+    '(font-use-system-font t)
     '(global-display-line-numbers-mode t)
     '(scroll-bar-mode nil)
     '(tool-bar-mode nil))
