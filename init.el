@@ -108,7 +108,6 @@
           sh-basic-offset 4
           sh-indentation 4
           sh-use-smie nil
-          indent-tabs-mode t
           tab-width 4
           nxml-child-indent 4)))
 
