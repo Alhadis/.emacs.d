@@ -102,6 +102,8 @@
   (setq plisp-syntax-highlighting-p t))
 (use 'pov-mode)
 (use 'powershell)
+(use 'rfc-mode
+  (setq rfc-mode-directory (expand-file-name "~/Forks/RFCs")))
 (use 'rust-mode)
 (use 's)
 (use 'scad-mode)
