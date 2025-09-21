@@ -66,6 +66,8 @@
 (use 'markdown-mode)
 (use 'masm-mode)
 (use 'mediawiki
+  (define-key mediawiki-mode-map [(backtab)] nil t)
+  (define-key mediawiki-mode-map [(tab)]     nil t)
   (dolist (patt '("\\.wiki\\(?:text\\|pedia\\)?\\'"
                   "\\.mediawiki\\'"))
           (add-to-list 'auto-mode-alist (cons patt 'mediawiki-mode))))
