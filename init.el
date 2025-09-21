@@ -135,6 +135,12 @@
 (add-hook 'kill-buffer-query-functions
   (lambda () (not (eq (get-buffer "*scratch*") (current-buffer)))))
 
+;; Locate Emacs's source code
+(setq find-function-C-source-directory
+  (locate-file "src"
+    '("~/Forks/GNU-Emacs" "~/Forks/Emacs") nil
+     (lambda (path) (if (file-directory-p path) 'dir-ok))))
+
 ;; Load Git-related major modes
 (add-to-list 'load-path "~/.emacs.d/git-modes")
 (add-hook 'git-commit-mode-hook
