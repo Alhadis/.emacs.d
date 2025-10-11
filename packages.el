@@ -106,6 +106,7 @@
 (use 'powershell)
 (use 'rfc-mode
   (setq rfc-mode-directory (expand-file-name "~/Forks/RFCs")))
+(use 'rdf-prefix)
 (use 'rust-mode)
 (use 's)
 (use 'scad-mode)
@@ -122,6 +123,10 @@
 (use 'spice-mode)
 (use 'ssh-config-mode)
 (use 'toml-mode)
+(use 'ttl-mode
+  (add-hook 'ttl-mode-hook 'turn-on-font-lock)
+  (add-to-list 'auto-mode-alist '("\\.\\(n[3t]\\|ttl\\|trig\\)\\'" . ttl-mode))
+  (define-derived-mode n3-mode ttl-mode "Notation3"))
 (use 'typescript-mode
   (add-to-list 'auto-mode-alist '("\\.tsx\\'" . typescript-mode))
   (dolist (name '("deno" "tsc" "ts-node"))
