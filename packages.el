@@ -142,8 +142,8 @@
   (setq x86-lookup-browse-pdf-function #'open-pdf)
   (setq x86-lookup-pdf
     (locate-file "325462-sdm-vol-1-2abcd-3abcd.pdf"
-      (list "~/Documents"      "~/Documents/eBooks"
-            "~/Downloads"      "~/Downloads/eBooks"
+      (list "~/Documents"      "~/Documents/Books/Specs"
+            "~/Downloads"      "~/Downloads/Books/Specs"
             "~/.files/share"   "~/.files/share/doc"
             "~/.files/var/doc" "~/.files/var/share/doc"
             "~/.local/share"   "~/.local/share/doc"
