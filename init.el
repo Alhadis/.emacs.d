@@ -29,6 +29,9 @@
     (add-hook 'after-init-hook (lambda ()
       (setq exec-path (split-string (getenv "PATH") path-separator t))))))
 
+;; Ensure trailing newline
+(setq require-final-newline t)
+
 ;; No pointless distractions, please
 (setq inhibit-startup-screen t)
 
