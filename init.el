@@ -144,6 +144,16 @@
     '("~/Forks/GNU-Emacs" "~/Forks/Emacs") nil
      (lambda (path) (if (file-directory-p path) 'dir-ok))))
 
+;; Instruct Emacs on using fortune(1) correctly
+(if-let* ((cmd (executable-find "fortune"))
+          (stringp cmd))
+  (setq fortune-dir "/usr/local/share/games/fortunes"
+        fortune-file (expand-file-name "computers" fortune-dir)
+        fortune-author-line-prefix "\t⸻ Alhadis"
+        fortune-always-compile nil
+        fortune-program-options '("-a")
+        fortune-command cmd))
+
 ;; Load Git-related major modes
 (add-to-list 'load-path "~/.emacs.d/git-modes")
 (add-hook 'git-commit-mode-hook
