@@ -130,6 +130,7 @@
   (setq plisp-syntax-highlighting-p t))
 (use 'pov-mode)
 (use 'powershell)
+(use 'rec-mode)
 (use 'rfc-mode
   (setq rfc-mode-directory (expand-file-name "~/Forks/RFCs")))
 (use 'rdf-prefix)
