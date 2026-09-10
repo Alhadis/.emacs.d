@@ -15,6 +15,8 @@
 (global-set-key (kbd "C-]") 'next-buffer)
 (global-set-key (kbd "C-<prior>") 'beginning-of-buffer)
 (global-set-key (kbd "C-<next>") 'end-of-buffer)
+(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+(global-set-key (kbd "s-<down>") 'end-of-buffer)
 (global-set-key (kbd "C-a") 'mark-whole-buffer)
 (define-key lisp-interaction-mode-map (kbd "C-e") 'eval-defun)
 (add-hook 'dired-load-hook (lambda() (define-key dired-mode-map (kbd "C-o") nil)))
