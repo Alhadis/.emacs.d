@@ -18,10 +18,11 @@ package-lock.json
 /test.*
 
 # Project-specific
-*.elc
+*.el[cn]
 /.cask
 /auto-save-list
 /custom.el
+/eln-cache
 /elpa
 /session*
 /snippets
