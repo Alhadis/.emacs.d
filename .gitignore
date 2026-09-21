@@ -27,5 +27,6 @@ package-lock.json
 /session*
 /snippets
 /site.el
+/tramp
 /transient
 /url
