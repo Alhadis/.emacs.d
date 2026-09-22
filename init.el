@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t; -*-
+
 ;; Locale
 (set-language-environment "UTF-8")
 (setenv "LANG" "en_AU.UTF-8")

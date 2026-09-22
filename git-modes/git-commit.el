@@ -1,4 +1,4 @@
-;;; git-commit.el --- Major mode for editing git commit messages
+;;; git-commit.el --- Major mode for editing git commit messages -*- lexical-binding: t; -*-
 
 ;; This software is Copyright (c) 2010 by Florian Ragwitz.
 ;;

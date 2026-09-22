@@ -1,4 +1,5 @@
-; -*- truncate-lines: t; -*-
+; -*- lexical-binding: t; truncate-lines: t; -*-
+
 ;; Disable that nasty background applied to “bold” TTY text
 (tty-suppress-bold-inverse-default-colors t)
 

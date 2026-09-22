@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (global-unset-key [(control z)])
 (global-unset-key [(control x)(control z)])
 (global-unset-key [(control h)(control c)])
