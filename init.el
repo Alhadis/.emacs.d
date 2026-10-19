@@ -69,13 +69,26 @@
                              'nasm-mode
                              'masm-mode))))
 
+(defconst lisp-modes
+  '(common-lisp-mode
+    emacs-lisp-mode
+    euslisp-mode
+    islisp-mode
+    lfe-mode
+    lisp-data-mode
+    lisp-interaction-mode
+    lisp-mode
+    newlisp-mode
+    plisp-mode
+    racket-mode
+    scheme-mode
+    ulisp-mode)
+  "List of major-modes for Lisp or Lisp-like languages.")
+
 (defun lispp ()
   "Return t if `major-mode' is any derivative of Lisp."
   (interactive)
-  (not (null (derived-mode-p 'emacs-lisp-mode
-                             'lisp-interaction-mode
-                             'lisp-mode
-                             'scheme-mode))))
+  (not (null (derived-mode-p lisp-modes))))
 
 (defun find-app (id)
   "Locate a macOS `*.app' bundle with the given ID."
