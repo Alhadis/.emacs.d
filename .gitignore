@@ -19,9 +19,11 @@ package-lock.json
 
 # Project-specific
 *.el[cn]
+*.dynvars
 /.cask
 /auto-save-list
 /custom.el
+/dynvars
 /eln-cache
 /elpa
 /session*
