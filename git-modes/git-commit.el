@@ -151,17 +151,20 @@
 
 (defface git-commit-comment-heading-face
   '((t (:inherit git-commit-known-pseudo-header-face)))
-  "Face used to highlight section headings in the default comments in git commit messages"
+  "Face used to highlight section headings in
+the default comments in git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-comment-file-face
   '((t (:inherit git-commit-pseudo-header-face)))
-  "Face used to highlight filenames in the default comments in git commit messages"
+  "Face used to highlight filenames in the
+default comments in git commit messages"
   :group 'git-commit-faces)
 
 (defface git-commit-comment-action-face
   '((t (:inherit git-commit-branch-face)))
-  "Face used to highlight what has happened to files in the default comments in git commit messages"
+  "Face used to highlight what has happened to files
+in the default comments in git commit messages"
   :group 'git-commit-faces)
 
 (defconst git-commit-font-lock-keywords-1
@@ -237,7 +240,7 @@ After calling `save-buffer', the hooks in
 in a way that simply invokes Emacs for editing the commit
 message, you might want to this:
 
-  (add-hook 'git-commit-commit-hook
+  (add-hook \\='git-commit-commit-hook
           (lambda () (save-buffers-kill-terminal)))"
   (interactive)
   (save-buffer)
@@ -245,7 +248,7 @@ message, you might want to this:
 
 (defun git-commit-git-config-var (key)
   "Retrieve a git configuration value.
-Invokes 'git config --get' to retrieve the value for the
+Invokes \"git config --get\" to retrieve the value for the
 configuration key KEY."
   (let* ((exit)
         (output
@@ -265,13 +268,13 @@ Walk VARS, call `getenv' on each element and return the first
 non-nil return value of `getenv'."
   (cl-loop for var in vars
         do (let ((val (getenv var)))
-             (when val (return val)))))
+             (when val (cl-return val)))))
 
 (defun git-commit-committer-name ()
   "Get the git committer name of the current user.
 This uses the same mechanism git itself uses.  That is, using the
-value of the 'GIT_AUTHOR_NAME' or 'GIT_COMMITTER_NAME'
-environment variables, or the 'user.name' git configuration
+value of the \"GIT_AUTHOR_NAME\" or \"GIT_COMMITTER_NAME\"
+environment variables, or the \"user.name\" git configuration
 variable.
 
 If the above mechanism fails, the value of the variable
@@ -284,8 +287,8 @@ If the above mechanism fails, the value of the variable
 (defun git-commit-committer-email ()
   "Get the git committer email address of the current user.
 This uses the same mechanism git itself uses.  That is, using the
-value of the 'GIT_AUTHOR_EMAIL', 'GIT_COMMITTER_EMAIL', or
-'EMAIL' environment variables, or the 'user.email' git
+value of the \"GIT_AUTHOR_EMAIL\", \"GIT_COMMITTER_EMAIL\", or
+\"EMAIL\" environment variables, or the \"user.email\" git
 configuration variable.
 
 If the above mechanism fails, the value of the variable
@@ -325,10 +328,10 @@ before any trailing comments git or the user might have inserted."
 
 (defun git-commit-insert-header (type name email &optional note)
   "Insert a header into the commit message.
-The inserted headers have the format 'TYPE: NAME <EMAIL>'.
+The inserted headers have the format \"TYPE: NAME <EMAIL>\".
 
 If NOTE satisfies `stringp', an additional note of the format
-'[EMAIL: NOTE]' is inserted after the header.
+\"[EMAIL: NOTE]\" is inserted after the header.
 
 If NOTE is not nil and doesn't satisfy `stringp', the
 surroundings of an additional note will be inserted, and the
@@ -374,7 +377,7 @@ ACTION will be part of the function name.
 HEADER is the actual header to be inserted into the comment."
   (let ((func-name (intern (concat "git-commit-" action))))
     `(defun ,func-name (&optional note)
-       ,(format "Insert a '%s' header at the end of the commit message.
+       ,(format "Insert a \\='%s\\=' header at the end of the commit message.
 If NOTE is given, an additional note will be inserted.
 
 If NOTE satisfies `stringp', the value of NOTE will be inserted
@@ -405,7 +408,7 @@ ACTION will be part of the function name.
 HEADER is the actual header to be inserted into the comment."
   (let ((func-name (intern (concat "git-commit-" action))))
     `(defun ,func-name (name email &optional note)
-       ,(format "Insert a '%s' header at the end of the commit message.
+       ,(format "Insert a \\='%s\\=' header at the end of the commit message.
 The value of the header is determined by NAME and EMAIL.
 
 When called interactively, both NAME and EMAIL are read from the
@@ -457,7 +460,7 @@ NOTE defaults to `current-prefix-arg'."
                         (with-current-buffer buffer
                           (buffer-substring-no-properties beg (point-max))))
                        (diff-mode)
-                       (font-lock-fontify-buffer)
+                       (font-lock-ensure)
                        (let ((pos (point-min))
                              next)
                          (while (setq next (next-single-property-change pos 'face))

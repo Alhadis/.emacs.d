@@ -21,9 +21,9 @@
     (eval-when-compile (require 'subr-x))
     (dolist (var '("PATH" "MANPATH")) (setenv var
       (string-join (append
-        (condition-case error
+        (condition-case nil
           (process-lines "/bin/sh" "-c" (format ". ~/.profile; printf '%%s\\n' \"$%s\" | tr : '\\n'" var))
-          (message "Failed to list $%s: %s" var error) nil)
+          (message "Failed to list $%s: %s" var error))
         (if (string= var "PATH")
           (seq-filter (lambda (x) (string-prefix-p invocation-directory x)) exec-path)
           (list (expand-file-name (concat invocation-directory "../Resources/man")))))
