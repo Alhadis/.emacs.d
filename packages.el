@@ -1,4 +1,4 @@
-;; -*- lexical-binding: t; -*-
+;; -*- lexical-binding: nil; -*-
 
 ;; Source packages from MELPA
 (require 'package)
@@ -66,6 +66,25 @@
 (use 'cmake-mode)
 (use 'cperl-mode)
 (use 'coffee-mode)
+(use 'comint-mime
+  (add-hook 'shell-mode-hook 'comint-mime-setup)
+  (add-hook 'inferior-python-mode-hook 'comint-mime-setup)
+  (setq comint-mime-use-mathjax t
+        comint-mime-use-vtable t))
+(use 'common-lisp-snippets)
+(use 'cosmo)
+(use 'counsel
+  (counsel-mode)
+  (setq counsel-async-command-delay 1
+        counsel-describe-function-preselect 'ivy-thing-at-point
+        counsel-find-file-at-point t
+        counsel-mode-override-describe-bindings t
+        counsel-org-headline-display-tags t
+        counsel-org-headline-display-todo t
+        counsel-up-directory-level nil)
+  (cl-case system-type
+    ((darwin  quote) (setq counsel-locate-cmd 'counsel-locate-cmd-mdfind))
+    ((openbsd quote) (setq counsel-root-command "doas"))))
 (use 'csv-mode)
 (use 'cuda-mode)
 (use 'cycle-quotes)
@@ -167,6 +186,7 @@
 (use 'sml-mode)
 (use 'spice-mode)
 (use 'ssh-config-mode)
+(use 'swiper)
 (use 'toml-mode)
 (use 'ttl-mode
   (add-hook 'ttl-mode-hook 'turn-on-font-lock)
@@ -182,6 +202,8 @@
   (add-to-list 'yas-snippet-dirs "~/Labs/YASR/snippets")
   (setq yas-indent-line "fixed")
   (yas-global-mode 1))
+(use 'xelb-mode)
+(use 'xkb-mode)
 (use 'xterm-color)
 (use 'x86-lookup
   (setq x86-lookup-browse-pdf-function #'open-pdf)
