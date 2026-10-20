@@ -95,7 +95,8 @@
 (use 'dotenv-mode)
 (use 'dyalog-mode)
 (use 'ebnf-mode)
-(use 'editorconfig)
+(use 'editorconfig
+   (editorconfig-mode t))
 (use 'editorconfig-domain-specific)
 (use 'editorconfig-custom-majormode)
 (use 'editorconfig-charset-extras)
