@@ -79,6 +79,7 @@
     '(font-lock-type-face          ((t (:foreground "medium purple"))))
     '(font-lock-variable-name-face ((t (:foreground "yellow green"))))
     '(font-lock-warning-face       ((t (:foreground "red" :weight bold))))
+    '(form-feed-line               ((t (:strike-through "gray50"))))
     '(header-line                  ((t (:inverse-video t :box (:line-width -1 :color "red" :style released-button)))))
     '(highlight                    ((t (:background "sea green"))))
     '(line-number                  ((t (:foreground "#666666"))))
