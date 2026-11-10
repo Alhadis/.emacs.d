@@ -18,17 +18,6 @@
 ;; Begin loading packages
 (use 'aggressive-indent
   (add-hook 'emacs-lisp-mode-hook #'aggressive-indent-mode))
-(use 'cc-mode
-  (add-hook 'cc-mode-hook (lambda ()
-    (setq c-file-style "K&R")
-    (setq c-basic-offset 4)
-    (setq c-tab-always-indent t)
-    (setq c-syntactic-indentation nil))))
-(use 'cperl-mode
-  (setq tab-width 8)
-  (setq cperl-indent-level 8)
-  (setq cperl-extra-newline-before-brace nil)
-  (setq cperl-merge-trailing-else nil))
 (use '0xc)
 (use 'academic-phrases)
 (use 'adoc-mode)
@@ -63,8 +52,20 @@
 (use 'bnf-mode)
 (use 'bnfc)
 (use 'brainfuck-mode)
+(use 'c-mode
+  (add-hook 'c-mode-hook (lambda ()
+    (setq c-file-style "stroustrup")
+    (setq c-basic-offset 4)
+    (setq c-tab-always-indent t)
+    (setq c-syntactic-indentation nil)
+    (setq tab-width 4))))
 (use 'cmake-mode)
-(use 'cperl-mode)
+(use 'cperl-mode
+  (add-hook 'cperl-mode-hook (lambda ()
+    (setq tab-width 8)
+    (setq cperl-indent-level 8)
+    (setq cperl-extra-newline-before-brace nil)
+    (setq cperl-merge-trailing-else nil))))
 (use 'coffee-mode)
 (use 'comint-mime
   (add-hook 'shell-mode-hook 'comint-mime-setup)
@@ -100,19 +101,6 @@
 (use 'editorconfig-domain-specific)
 (use 'editorconfig-custom-majormode)
 (use 'editorconfig-charset-extras)
-(use 'edit-server
-  (setq edit-server-new-frame-alist
-    '((name . "Edit with Emacs FRAME")
-      (top . 200)
-      (left . 200)
-      (width . 80)
-      (height . 25)
-      (minibuffer . t)
-      (menu-bar-lines . t)
-      (window-system . x)))
-  (if after-init-time
-      (edit-server-start)
-      (add-hook 'after-init-hook 'edit-server-start)))
 (use 'enh-ruby-mode)
 (use 'fic-mode)
 (use 'firestarter)
@@ -126,6 +114,8 @@
 (use 'iasm-mode)
 (use 'ini-mode)
 (use 'intel-hex-mode)
+(use 'isbn)
+(use 'keg-mode)
 (use 'less-css-mode)
 (use 'lfe-mode)
 (use 'markdown-mode)
@@ -168,6 +158,7 @@
   (setq plisp-syntax-highlighting-p t))
 (use 'pov-mode)
 (use 'powershell)
+(use 'rare-words)
 (use 'rec-mode)
 (use 'rfc-mode
   (setq rfc-mode-directory (expand-file-name "~/Forks/RFCs")))
