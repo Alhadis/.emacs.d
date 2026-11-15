@@ -52,7 +52,7 @@
 (use 'bnf-mode)
 (use 'bnfc)
 (use 'brainfuck-mode)
-(use 'c-mode
+(use 'cc-mode
   (add-hook 'c-mode-hook (lambda ()
     (setq c-file-style "stroustrup")
     (setq c-basic-offset 4)
@@ -194,7 +194,7 @@
   (add-to-list 'yas-snippet-dirs "~/Labs/YASR/snippets")
   (setq yas-indent-line "fixed")
   (yas-global-mode 1))
-(use 'xelb-mode)
+(use 'xelb)
 (use 'xkb-mode)
 (use 'xterm-color)
 (use 'x86-lookup
