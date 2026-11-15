@@ -210,3 +210,9 @@
             "/usr/share"       "/usr/share/doc"
             "~/.emacs.d"))))
 (use 'yaml-mode)
+
+;; Install missing packages
+(unless (null package-selected-packages)
+        (custom-set-variables '(package-selected-packages ,@package-selected-packages))
+        (package-refresh-contents)
+        (package-install-selected-packages))
