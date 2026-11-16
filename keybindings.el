@@ -24,6 +24,25 @@
 
 
 ;; Custom commands
+(global-set-key
+  (kbd "M-<up>")
+  (defun previous-heading ()
+    "Move point to the previous buffer landmark."
+    (interactive)
+    (if (and (local-variable-if-set-p 'outline-minor-mode)
+             (symbol-value 'outline-minor-mode))
+        (outline-previous-visible-heading 1)
+        (backward-page))))
+
+(global-set-key
+  (kbd "M-<down>")
+  (defun next-heading ()
+    "Move point to the next buffer landmark."
+    (interactive)
+    (if (and (local-variable-if-set-p 'outline-minor-mode)
+             (symbol-value 'outline-minor-mode))
+        (outline-next-visible-heading 1)
+        (forward-page))))
 
 (global-set-key
  (kbd "C-w")
