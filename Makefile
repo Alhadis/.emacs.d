@@ -4,7 +4,18 @@
 > ?= $(.ALLSRC)
 ^ ?= $>
 
-all: snippets
+all: links snippets
+
+# Create symbolic links
+links: site ~/.dir-locals.el
+
+# Link to package-installed Elisp files
+site: /usr/local/share/emacs/site-lisp
+	ln -s $^ $@
+
+# Symlink directory-local variables file to $HOME
+~/.dir-locals.el: .dir-locals.el
+	cd ~ && ln -s .emacs.d/.dir-locals.el $@
 
 # Checkout snippets repository if we haven't already
 snippets:

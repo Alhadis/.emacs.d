@@ -28,6 +28,7 @@ package-lock.json
 /elpa
 /session*
 /snippets
+/site
 /site.el
 /tramp
 /transient
