@@ -108,6 +108,7 @@
   (global-form-feed-mode))
 (use 'forth-mode)
 (use 'glsl-mode)
+(use 'gnu-apl-mode)
 (use 'go-mode)
 (use 'haskell-mode)
 (use 'haskell-tab-indent)
@@ -118,6 +119,16 @@
 (use 'keg-mode)
 (use 'less-css-mode)
 (use 'lfe-mode)
+(use 'ligature
+  (when (and (not (getenv "DISPLAY"))
+             (equal (face-attribute 'default :family)) "Menlig")
+     (global-ligature-mode t)
+     (ligature-set-ligatures 'prog-mode
+       '("++++" "+++" "++" "-->" "-<<" "--" "-<" "->" "-[" "..." ".." "/=" "::"
+         "<-->" "<==>" "<--" "<->" "<==" "<=>" "<|>" "<-" "<=" "<|" "=<<" "==="
+         "==>" "==" "=>" ">>-" ">>=" ">-" "]-" "|>" "***" "///" "//" "{{{" "}}}"
+         " ← " " → " " ⇐ " " ⇒ " " →" " ←" " ⇒" " ⇐" "← " "→ " "⇐ " "⇒ " "{{" "}}"
+         " ≡ " " ≢ " " ≡" " ≢" "≡ " "≢ " "```" "``")))
 (use 'markdown-mode)
 (use 'masm-mode)
 (use 'mediawiki
